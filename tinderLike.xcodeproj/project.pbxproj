@@ -12,6 +12,9 @@
 		4F19D44821D285EA00C8B2B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F19D44621D285EA00C8B2B5 /* Main.storyboard */; };
 		4F19D44A21D285ED00C8B2B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F19D44921D285ED00C8B2B5 /* Assets.xcassets */; };
 		4F19D44D21D285ED00C8B2B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F19D44B21D285ED00C8B2B5 /* LaunchScreen.storyboard */; };
+		4F19D45621D29B7800C8B2B5 /* Extensions+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F19D45521D29B7800C8B2B5 /* Extensions+UIView.swift */; };
+		4F19D45921D6EABD00C8B2B5 /* HomeBottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F19D45821D6EABD00C8B2B5 /* HomeBottomControlsStackView.swift */; };
+		4F19D45B21D6F75F00C8B2B5 /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F19D45A21D6F75F00C8B2B5 /* TopNavigationStackView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		4F19D44921D285ED00C8B2B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F19D44C21D285ED00C8B2B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F19D44E21D285ED00C8B2B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4F19D45521D29B7800C8B2B5 /* Extensions+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIView.swift"; sourceTree = "<group>"; };
+		4F19D45821D6EABD00C8B2B5 /* HomeBottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomControlsStackView.swift; sourceTree = "<group>"; };
+		4F19D45A21D6F75F00C8B2B5 /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +60,8 @@
 		4F19D44121D285EA00C8B2B5 /* tinderLike */ = {
 			isa = PBXGroup;
 			children = (
+				4F19D45721D6EA8000C8B2B5 /* Views */,
+				4F19D45421D29B4800C8B2B5 /* Extensions */,
 				4F19D44221D285EA00C8B2B5 /* AppDelegate.swift */,
 				4F19D44421D285EA00C8B2B5 /* ViewController.swift */,
 				4F19D44621D285EA00C8B2B5 /* Main.storyboard */,
@@ -62,6 +70,23 @@
 				4F19D44E21D285ED00C8B2B5 /* Info.plist */,
 			);
 			path = tinderLike;
+			sourceTree = "<group>";
+		};
+		4F19D45421D29B4800C8B2B5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4F19D45521D29B7800C8B2B5 /* Extensions+UIView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4F19D45721D6EA8000C8B2B5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4F19D45821D6EABD00C8B2B5 /* HomeBottomControlsStackView.swift */,
+				4F19D45A21D6F75F00C8B2B5 /* TopNavigationStackView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,7 +161,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F19D44521D285EA00C8B2B5 /* ViewController.swift in Sources */,
+				4F19D45921D6EABD00C8B2B5 /* HomeBottomControlsStackView.swift in Sources */,
 				4F19D44321D285EA00C8B2B5 /* AppDelegate.swift in Sources */,
+				4F19D45621D29B7800C8B2B5 /* Extensions+UIView.swift in Sources */,
+				4F19D45B21D6F75F00C8B2B5 /* TopNavigationStackView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,7 +320,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.pauldefilippi.tinderLike;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -310,7 +338,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.pauldefilippi.tinderLike;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
