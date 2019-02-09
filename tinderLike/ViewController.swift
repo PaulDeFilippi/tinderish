@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         setupDummyCards()
     }
     
-    // MARK:- FIleprivate
+    // MARK:- Fileprivate
     
     fileprivate func setupDummyCards() {
         let cardView = CardView(frame: .zero)
