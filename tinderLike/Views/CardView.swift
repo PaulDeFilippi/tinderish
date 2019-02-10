@@ -28,7 +28,6 @@ class CardView: UIView {
         imageView.fillSuperview()
         
         addSubview(informationLabel)
-        //informationLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
         informationLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 15, bottom: 15, right: 15))
         informationLabel.text = "TEST NAME TEST NAME AGE"
         informationLabel.textColor = .white

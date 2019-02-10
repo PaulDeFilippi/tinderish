@@ -6,7 +6,7 @@
 //  Copyright © 2019 Paul Defilippi. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct User {
     // defining our properties for our model layer which are the properties
@@ -15,4 +15,13 @@ struct User {
     let age: Int
     let profession: String
     let imageName: String
+    
+    func toCardViewModel() -> CardViewModel {
+        let attributedText = NSMutableAttributedString(string: name, attributes: [.font: UIFont.systemFont(ofSize: 32, weight: .heavy)])
+        attributedText.append(NSMutableAttributedString(string: "  \(age)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .regular)]))
+        attributedText.append(NSMutableAttributedString(string: "\n\(profession)", attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .regular)]))
+        return CardViewModel(imageName: imageName, attributedString: attributedText, textAlignment: .left)
+    }
+
+
 }
