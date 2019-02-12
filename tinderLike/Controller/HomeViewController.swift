@@ -19,11 +19,26 @@ class HomeViewController: UIViewController {
 //        User(name: "Samantha", age: 29, profession: "Teacher", imageName: "lady4c")
 //    ]
     
-    let cardViewModels = [
-        User(name: "Catherine", age: 23, profession: "Disc Jockey", imageName: "lady5c").toCardViewModel(),
-        User(name: "Samantha", age: 29, profession: "Teacher", imageName: "lady4c").toCardViewModel()
-
-    ]
+//    let cardViewModels = ([
+//        User(name: "Catherine", age: 23, profession: "Disc Jockey", imageName: "lady5c"),
+//        User(name: "Samantha", age: 29, profession: "Teacher", imageName: "lady4c"),
+//        Advertiser(title: "Slide Out Menu", brandName: "Code44", posterPhotoName: "slide_out_menu_poster")
+//        ] as [CardViewModelProduceable]).map { (producer) -> CardViewModel in
+//            return producer.toCardViewModel()
+//    }
+    
+    let cardViewModels: [CardViewModel] = {
+        let producers = [
+            User(name: "Catherine", age: 23, profession: "Disc Jockey", imageName: "lady5c"),
+            User(name: "Samantha", age: 29, profession: "Teacher", imageName: "lady4c"),
+            Advertiser(title: "Slide Out Menu", brandName: "Code44", posterPhotoName: "slide_out_menu_poster")
+        ] as [CardViewModelProduceable]
+        
+        let viewModels = producers.map({return $0.toCardViewModel()})
+        return viewModels
+        
+        
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,9 +51,12 @@ class HomeViewController: UIViewController {
     fileprivate func setupDummyCards() {
         cardViewModels.forEach { (cardVM) in
             let cardView = CardView(frame: .zero)
-            cardView.imageView.image = UIImage(named: cardVM.imageName)
-            cardView.informationLabel.attributedText = cardVM.attributedString
-            cardView.informationLabel.textAlignment = cardVM.textAlignment
+            
+            cardView.cardViewModel = cardVM
+            
+//            cardView.imageView.image = UIImage(named: cardVM.imageName)
+//            cardView.informationLabel.attributedText = cardVM.attributedString
+//            cardView.informationLabel.textAlignment = cardVM.textAlignment
             cardsDeckView.addSubview(cardView)
             cardView.fillSuperview()
         }

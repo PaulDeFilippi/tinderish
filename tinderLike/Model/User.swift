@@ -8,7 +8,8 @@
 
 import UIKit
 
-struct User {
+struct User: CardViewModelProduceable {
+    
     // defining our properties for our model layer which are the properties
     // we need for each user on our cards
     let name: String
