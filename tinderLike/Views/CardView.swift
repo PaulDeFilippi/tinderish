@@ -12,9 +12,19 @@ class CardView: UIView {
     
     var cardViewModel: CardViewModel! {
         didSet {
-            imageView.image = UIImage(named: cardViewModel.imageName)
+            // let imageName = cardViewModel.imageNames[0] - this works but app will crash if there is no [0] index
+            // needed to unwrap the imageNames variable after we changed it to an Array of images
+            let imageName = cardViewModel.imageNames.first ?? ""
+            imageView.image = UIImage(named: imageName)
             informationLabel.attributedText = cardViewModel.attributedString
             informationLabel.textAlignment = cardViewModel.textAlignment
+            
+            (0..<cardViewModel.imageNames.count).forEach { (_) in
+                let barView = UIView()
+                barView.backgroundColor = barDeselectedColor
+                barStackView.addArrangedSubview(barView)
+            }
+            barStackView.arrangedSubviews.first?.backgroundColor = .white
         }
     }
     
@@ -33,6 +43,8 @@ class CardView: UIView {
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         addGestureRecognizer(panGesture)
+        
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -48,6 +60,8 @@ class CardView: UIView {
         addSubview(imageView)
         imageView.fillSuperview()
         
+        setupBarsStackView()
+        
         // add gradient layer - take into account z-index when adding a subview
         setupGradientLayer()
         
@@ -56,6 +70,37 @@ class CardView: UIView {
         informationLabel.textColor = .white
         informationLabel.font = UIFont.systemFont(ofSize: 34, weight: .heavy)
         informationLabel.numberOfLines = 0
+    }
+    
+    var imageIndex = 0
+    fileprivate let barDeselectedColor = UIColor(white: 0, alpha: 0.1)
+    
+    @objc fileprivate func handleTap(gesture: UITapGestureRecognizer) {
+        print("tap tap tap !!!")
+        let tapLocation = gesture.location(in: nil)
+        let shouldAdvanceNextPhoto = tapLocation.x > frame.width / 2 ? true : false
+        if shouldAdvanceNextPhoto {
+            imageIndex = min(imageIndex + 1, cardViewModel.imageNames.count - 1)
+        } else {
+            imageIndex = max(0, imageIndex - 1)
+        }
+        let imageName = cardViewModel.imageNames[imageIndex]
+        imageView.image = UIImage(named: imageName)
+        
+        barStackView.arrangedSubviews.forEach { (v) in
+            v.backgroundColor = barDeselectedColor
+        }
+        
+        barStackView.arrangedSubviews[imageIndex].backgroundColor = .white
+    }
+    
+    fileprivate let barStackView = UIStackView()
+    
+    fileprivate func setupBarsStackView() {
+        addSubview(barStackView)
+        barStackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 8, left: 8, bottom: 0, right: 8), size: .init(width: 0, height: 4))
+        barStackView.spacing = 4
+        barStackView.distribution = .fillEqually
     }
     
     fileprivate func setupGradientLayer() {
