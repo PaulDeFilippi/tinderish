@@ -25,7 +25,22 @@ class CardView: UIView {
                 barStackView.addArrangedSubview(barView)
             }
             barStackView.arrangedSubviews.first?.backgroundColor = .white
+            
+            setupImageIndexObserver()
         }
+    }
+    
+    fileprivate func setupImageIndexObserver() {
+        cardViewModel.immageIndexObserver = { [weak self] (idx, image) in
+            print("Changing Image from view model")
+            self?.imageView.image = image
+            
+            self?.barStackView.arrangedSubviews.forEach({ (v) in
+                v.backgroundColor = self?.barDeselectedColor
+            })
+            self?.barStackView.arrangedSubviews[idx].backgroundColor = .white
+        }
+        
     }
     
     // Encapsulation
@@ -72,26 +87,32 @@ class CardView: UIView {
         informationLabel.numberOfLines = 0
     }
     
-    var imageIndex = 0
+    //var imageIndex = 0
     fileprivate let barDeselectedColor = UIColor(white: 0, alpha: 0.1)
     
     @objc fileprivate func handleTap(gesture: UITapGestureRecognizer) {
         print("tap tap tap !!!")
         let tapLocation = gesture.location(in: nil)
         let shouldAdvanceNextPhoto = tapLocation.x > frame.width / 2 ? true : false
+        
         if shouldAdvanceNextPhoto {
-            imageIndex = min(imageIndex + 1, cardViewModel.imageNames.count - 1)
+            cardViewModel.advanceToNextPhoto()
         } else {
-            imageIndex = max(0, imageIndex - 1)
+            cardViewModel.goToPreviousImage()
         }
-        let imageName = cardViewModel.imageNames[imageIndex]
-        imageView.image = UIImage(named: imageName)
-        
-        barStackView.arrangedSubviews.forEach { (v) in
-            v.backgroundColor = barDeselectedColor
-        }
-        
-        barStackView.arrangedSubviews[imageIndex].backgroundColor = .white
+//        if shouldAdvanceNextPhoto {
+//            imageIndex = min(imageIndex + 1, cardViewModel.imageNames.count - 1)
+//        } else {
+//            imageIndex = max(0, imageIndex - 1)
+//        }
+//        let imageName = cardViewModel.imageNames[imageIndex]
+//        imageView.image = UIImage(named: imageName)
+//
+//        barStackView.arrangedSubviews.forEach { (v) in
+//            v.backgroundColor = barDeselectedColor
+//        }
+//
+//        barStackView.arrangedSubviews[imageIndex].backgroundColor = .white
     }
     
     fileprivate let barStackView = UIStackView()
