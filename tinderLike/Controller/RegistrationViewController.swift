@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import JGProgressHUD
 
 class RegistrationViewController: UIViewController {
 
@@ -135,6 +137,62 @@ class RegistrationViewController: UIViewController {
         gradientLayer.frame = view.bounds
     }
     
+    @objc fileprivate func handleTextChange(textField: UITextField) {
+        if textField == fullNameTextField {
+            print("Full name changing")
+            registrationViewModel.fullName = textField.text
+        } else if textField == emailTextField {
+            print("Email changing")
+            registrationViewModel.email = textField.text
+        } else {
+            print("Password changing")
+            registrationViewModel.password = textField.text
+        }
+        
+        //        let isFormValid = fullNameTextField.text?.isEmpty == false && emailTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false
+        //
+        //        registerButton.isEnabled = isFormValid
+        //
+        //        if isFormValid {
+        //            registerButton.backgroundColor = #colorLiteral(red: 0.8150340915, green: 0.1037541553, blue: 0.33536762, alpha: 1)
+        //            registerButton.setTitleColor(.white, for: .normal)
+        //            registerButton.layer.borderColor = UIColor.white.cgColor
+        //        } else {
+        //            registerButton.backgroundColor = .lightGray
+        //            registerButton.setTitleColor(.white, for: .normal)
+        //            registerButton.layer.borderColor = UIColor.darkGray.cgColor
+        //        }
+        
+    }
+    
+    @objc fileprivate func handleRegister() {
+        self.handleTapDismiss()
+        print("Register button tapped")
+        
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            
+            if let error = error {
+                print(error)
+                self.showHUDWithError(error: error)
+                return
+            }
+            
+            print("SUccesfully registered user:", result?.user.uid ?? "")
+        }
+        
+    }
+    
+    fileprivate func showHUDWithError(error: Error) {
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Failed Operation"
+        hud.detailTextLabel.text = error.localizedDescription
+        hud.show(in: self.view)
+        hud.dismiss(afterDelay: 4)
+    }
+    
     // MARK:- All Views
     
     let selectPhotoButton: UIButton = {
@@ -178,34 +236,6 @@ class RegistrationViewController: UIViewController {
         return tf
     }()
     
-    @objc fileprivate func handleTextChange(textField: UITextField) {
-        if textField == fullNameTextField {
-            print("Full name changing")
-            registrationViewModel.fullName = textField.text
-        } else if textField == emailTextField {
-            print("Email changing")
-            registrationViewModel.email = textField.text
-        } else {
-            print("Password changing")
-            registrationViewModel.password = textField.text
-        }
-        
-//        let isFormValid = fullNameTextField.text?.isEmpty == false && emailTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false
-//
-//        registerButton.isEnabled = isFormValid
-//
-//        if isFormValid {
-//            registerButton.backgroundColor = #colorLiteral(red: 0.8150340915, green: 0.1037541553, blue: 0.33536762, alpha: 1)
-//            registerButton.setTitleColor(.white, for: .normal)
-//            registerButton.layer.borderColor = UIColor.white.cgColor
-//        } else {
-//            registerButton.backgroundColor = .lightGray
-//            registerButton.setTitleColor(.white, for: .normal)
-//            registerButton.layer.borderColor = UIColor.darkGray.cgColor
-//        }
-        
-    }
-    
     let registerButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Register", for: .normal)
@@ -220,6 +250,7 @@ class RegistrationViewController: UIViewController {
         button.layer.cornerRadius = 25
         //button.layer.borderColor = UIColor.white.cgColor
         button.layer.borderWidth = 1.5
+        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
         
         return button
     }()
