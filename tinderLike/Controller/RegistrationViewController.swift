@@ -10,6 +10,24 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
+extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.originalImage] as? UIImage
+        
+        //registrationViewModel.image = image
+        registrationViewModel.bindableImage.value = image
+        
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true)
+    }
+    
+    
+}
+
 class RegistrationViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -27,9 +45,9 @@ class RegistrationViewController: UIViewController {
     let registrationViewModel = RegistrationViewModel()
     
     fileprivate func setupRegistrationViewModelObserver() {
-        registrationViewModel.isFormValidObserver = { [unowned self] (isFormValid) in
-            print("Form is changing, Is it valid?", isFormValid)
+        registrationViewModel.bindableIsFormValid.bind { [unowned self] (isFormValid) in
             
+            guard let isFormValid = isFormValid else { return }
             self.registerButton.isEnabled = isFormValid
             if isFormValid {
                 self.registerButton.backgroundColor = #colorLiteral(red: 0.8150340915, green: 0.1037541553, blue: 0.33536762, alpha: 1)
@@ -40,8 +58,33 @@ class RegistrationViewController: UIViewController {
                 self.registerButton.setTitleColor(.white, for: .normal)
                 self.registerButton.layer.borderColor = UIColor.darkGray.cgColor
             }
-            
         }
+        registrationViewModel.bindableImage.bind { [unowned self] (img) in
+            self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+        
+        
+//        registrationViewModel.isFormValidObserver = { [unowned self] (isFormValid) in
+//            print("Form is changing, Is it valid?", isFormValid)
+//            
+//            self.registerButton.isEnabled = isFormValid
+//            if isFormValid {
+//                self.registerButton.backgroundColor = #colorLiteral(red: 0.8150340915, green: 0.1037541553, blue: 0.33536762, alpha: 1)
+//                self.registerButton.setTitleColor(.white, for: .normal)
+//                self.registerButton.layer.borderColor = UIColor.white.cgColor
+//            } else {
+//                self.registerButton.backgroundColor = .lightGray
+//                self.registerButton.setTitleColor(.white, for: .normal)
+//                self.registerButton.layer.borderColor = UIColor.darkGray.cgColor
+//            }
+//        }
+//        registrationViewModel.bindableImage.bind { [unowned self] (img) in
+//            self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
+//        }
+        
+//        registrationViewModel.imageObserver = { [unowned self] img in
+//            self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
+//        }
         
     }
     
@@ -193,6 +236,14 @@ class RegistrationViewController: UIViewController {
         hud.dismiss(afterDelay: 4)
     }
     
+    @objc fileprivate func handleSelectPhoto() {
+        let imagePickerController = UIImagePickerController()
+        present(imagePickerController, animated: true)
+        imagePickerController.delegate = self
+        
+        
+    }
+    
     // MARK:- All Views
     
     let selectPhotoButton: UIButton = {
@@ -203,6 +254,9 @@ class RegistrationViewController: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.heightAnchor.constraint(equalToConstant: 275).isActive = true
         button.layer.cornerRadius = 16
+        button.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
+        button.imageView?.contentMode = .scaleAspectFill
+        button.clipsToBounds = true
         
         return button
     }()
@@ -251,6 +305,7 @@ class RegistrationViewController: UIViewController {
         //button.layer.borderColor = UIColor.white.cgColor
         button.layer.borderWidth = 1.5
         button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
+        
         
         return button
     }()

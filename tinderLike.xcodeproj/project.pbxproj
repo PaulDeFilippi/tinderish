@@ -23,6 +23,7 @@
 		4F9E269B224069AB009A9602 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F9E269A224069AB009A9602 /* GoogleService-Info.plist */; };
 		4FA26DFC221A2D33007C230A /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA26DFB221A2D33007C230A /* RegistrationViewController.swift */; };
 		4FA26DFE221A4098007C230A /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA26DFD221A4098007C230A /* CustomTextField.swift */; };
+		4FA33B35224825A200497068 /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA33B34224825A200497068 /* Bindable.swift */; };
 		4FD5422821DAC57000F7023A /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD5422721DAC57000F7023A /* CardView.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,7 @@
 		4F9E269A224069AB009A9602 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		4FA26DFB221A2D33007C230A /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		4FA26DFD221A4098007C230A /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		4FA33B34224825A200497068 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		4FD5422721DAC57000F7023A /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -132,6 +134,7 @@
 				4F19D44421D285EA00C8B2B5 /* HomeViewController.swift */,
 				4FA26DFB221A2D33007C230A /* RegistrationViewController.swift */,
 				4F9E26982235C962009A9602 /* RegistrationViewModel.swift */,
+				4FA33B34224825A200497068 /* Bindable.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FA33B35224825A200497068 /* Bindable.swift in Sources */,
 				4F19D44521D285EA00C8B2B5 /* HomeViewController.swift in Sources */,
 				4F9E26992235C962009A9602 /* RegistrationViewModel.swift in Sources */,
 				4FA26DFE221A4098007C230A /* CustomTextField.swift in Sources */,
