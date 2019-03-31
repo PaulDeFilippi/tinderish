@@ -14,9 +14,7 @@ extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigat
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.originalImage] as? UIImage
         
-        //registrationViewModel.image = image
         registrationViewModel.bindableImage.value = image
-        
         
         dismiss(animated: true, completion: nil)
     }
@@ -24,8 +22,6 @@ extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigat
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true)
     }
-    
-    
 }
 
 class RegistrationViewController: UIViewController {
@@ -63,29 +59,15 @@ class RegistrationViewController: UIViewController {
             self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
         
-        
-//        registrationViewModel.isFormValidObserver = { [unowned self] (isFormValid) in
-//            print("Form is changing, Is it valid?", isFormValid)
-//            
-//            self.registerButton.isEnabled = isFormValid
-//            if isFormValid {
-//                self.registerButton.backgroundColor = #colorLiteral(red: 0.8150340915, green: 0.1037541553, blue: 0.33536762, alpha: 1)
-//                self.registerButton.setTitleColor(.white, for: .normal)
-//                self.registerButton.layer.borderColor = UIColor.white.cgColor
-//            } else {
-//                self.registerButton.backgroundColor = .lightGray
-//                self.registerButton.setTitleColor(.white, for: .normal)
-//                self.registerButton.layer.borderColor = UIColor.darkGray.cgColor
-//            }
-//        }
-//        registrationViewModel.bindableImage.bind { [unowned self] (img) in
-//            self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
-//        }
-        
-//        registrationViewModel.imageObserver = { [unowned self] img in
-//            self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
-//        }
-        
+        registrationViewModel.bindableIsRegistering.bind { [unowned self] (isRegistering) in
+            if isRegistering == true {
+
+                self.registeringHUD.textLabel.text = "Register"
+                self.registeringHUD.show(in: self.view)
+            } else {
+                self.registeringHUD.dismiss()
+            }
+        }
     }
     
     fileprivate func setupTapGesture() {
@@ -103,7 +85,7 @@ class RegistrationViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self) // setup to make sure there is no retain cycle
+        //NotificationCenter.default.removeObserver(self) // setup to make sure there is no retain cycle
     }
     
     @objc fileprivate func handleKeyboardHide() {
@@ -192,43 +174,23 @@ class RegistrationViewController: UIViewController {
             registrationViewModel.password = textField.text
         }
         
-        //        let isFormValid = fullNameTextField.text?.isEmpty == false && emailTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false
-        //
-        //        registerButton.isEnabled = isFormValid
-        //
-        //        if isFormValid {
-        //            registerButton.backgroundColor = #colorLiteral(red: 0.8150340915, green: 0.1037541553, blue: 0.33536762, alpha: 1)
-        //            registerButton.setTitleColor(.white, for: .normal)
-        //            registerButton.layer.borderColor = UIColor.white.cgColor
-        //        } else {
-        //            registerButton.backgroundColor = .lightGray
-        //            registerButton.setTitleColor(.white, for: .normal)
-        //            registerButton.layer.borderColor = UIColor.darkGray.cgColor
-        //        }
-        
     }
+    
+    let registeringHUD = JGProgressHUD(style: .dark)
     
     @objc fileprivate func handleRegister() {
         self.handleTapDismiss()
-        print("Register button tapped")
         
-        guard let email = emailTextField.text else { return }
-        guard let password = passwordTextField.text else { return }
-        
-        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
-            
+        registrationViewModel.performRegistration { [weak self] (error) in
             if let error = error {
-                print(error)
-                self.showHUDWithError(error: error)
+                self?.showHUDWithError(error: error)
                 return
             }
-            
-            print("SUccesfully registered user:", result?.user.uid ?? "")
         }
-        
     }
     
     fileprivate func showHUDWithError(error: Error) {
+        registeringHUD.dismiss()
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Failed Operation"
         hud.detailTextLabel.text = error.localizedDescription
@@ -240,8 +202,6 @@ class RegistrationViewController: UIViewController {
         let imagePickerController = UIImagePickerController()
         present(imagePickerController, animated: true)
         imagePickerController.delegate = self
-        
-        
     }
     
     // MARK:- All Views
@@ -294,7 +254,6 @@ class RegistrationViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("Register", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        //button.backgroundColor = #colorLiteral(red: 0.8150340915, green: 0.1037541553, blue: 0.33536762, alpha: 1)
         button.backgroundColor = .lightGray
         button.setTitleColor(.darkGray, for: .disabled)
         button.isEnabled = false
@@ -302,10 +261,8 @@ class RegistrationViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 25
-        //button.layer.borderColor = UIColor.white.cgColor
         button.layer.borderWidth = 1.5
         button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
-        
         
         return button
     }()

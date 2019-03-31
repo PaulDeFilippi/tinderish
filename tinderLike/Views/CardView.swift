@@ -100,19 +100,6 @@ class CardView: UIView {
         } else {
             cardViewModel.goToPreviousImage()
         }
-//        if shouldAdvanceNextPhoto {
-//            imageIndex = min(imageIndex + 1, cardViewModel.imageNames.count - 1)
-//        } else {
-//            imageIndex = max(0, imageIndex - 1)
-//        }
-//        let imageName = cardViewModel.imageNames[imageIndex]
-//        imageView.image = UIImage(named: imageName)
-//
-//        barStackView.arrangedSubviews.forEach { (v) in
-//            v.backgroundColor = barDeselectedColor
-//        }
-//
-//        barStackView.arrangedSubviews[imageIndex].backgroundColor = .white
     }
     
     fileprivate let barStackView = UIStackView()
