@@ -186,6 +186,7 @@ class RegistrationViewController: UIViewController {
                 self?.showHUDWithError(error: error)
                 return
             }
+            print("Finished registering our user.")
         }
     }
     
