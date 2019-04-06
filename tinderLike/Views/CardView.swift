@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CardView: UIView {
     
@@ -15,7 +16,15 @@ class CardView: UIView {
             // let imageName = cardViewModel.imageNames[0] - this works but app will crash if there is no [0] index
             // needed to unwrap the imageNames variable after we changed it to an Array of images
             let imageName = cardViewModel.imageNames.first ?? ""
-            imageView.image = UIImage(named: imageName)
+            // imageView.image = UIImage(named: imageName)
+            // load image using some kind of url instead
+            if let url = URL(string: imageName) {
+                imageView.sd_setImage(with: url)
+            }
+            
+            
+            
+            
             informationLabel.attributedText = cardViewModel.attributedString
             informationLabel.textAlignment = cardViewModel.textAlignment
             
