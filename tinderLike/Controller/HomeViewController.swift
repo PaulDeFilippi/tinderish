@@ -35,7 +35,7 @@ class HomeViewController: UIViewController {
         topStackView.settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
         
         setupLayout()
-        setupDummyCards()
+        setupFirestoreUserCards()
         fetchUsersFromFirestore()
     }
     
@@ -54,7 +54,7 @@ class HomeViewController: UIViewController {
                 self.cardViewModels.append(user.toCardViewModel())
                 //print(user.name, user.imageNames)
             })
-            self.setupDummyCards()
+            self.setupFirestoreUserCards()
         }
     }
     
@@ -64,7 +64,7 @@ class HomeViewController: UIViewController {
         present(registrationViewController, animated: true)
     }
     
-    fileprivate func setupDummyCards() {
+    fileprivate func setupFirestoreUserCards() {
         cardViewModels.forEach { (cardVM) in
             let cardView = CardView(frame: .zero)
             cardView.cardViewModel = cardVM
