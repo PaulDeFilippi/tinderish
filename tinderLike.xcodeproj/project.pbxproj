@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4BAE8900BE8392A21D76EB63 /* Pods_tinderLike.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B50B1F6DE410173FFD72A1A /* Pods_tinderLike.framework */; };
+		4F136D07226A79B400E4A889 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F136D06226A79B400E4A889 /* SettingsController.swift */; };
 		4F19D44321D285EA00C8B2B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F19D44221D285EA00C8B2B5 /* AppDelegate.swift */; };
 		4F19D44521D285EA00C8B2B5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F19D44421D285EA00C8B2B5 /* HomeViewController.swift */; };
 		4F19D44821D285EA00C8B2B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F19D44621D285EA00C8B2B5 /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 		100828AD6E7C764B51EEC4E7 /* Pods-tinderLike.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tinderLike.release.xcconfig"; path = "Target Support Files/Pods-tinderLike/Pods-tinderLike.release.xcconfig"; sourceTree = "<group>"; };
 		11B438B83BCB03C2C081AC3C /* Pods-tinderLike.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tinderLike.debug.xcconfig"; path = "Target Support Files/Pods-tinderLike/Pods-tinderLike.debug.xcconfig"; sourceTree = "<group>"; };
 		3B50B1F6DE410173FFD72A1A /* Pods_tinderLike.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tinderLike.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F136D06226A79B400E4A889 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		4F19D43F21D285EA00C8B2B5 /* tinderLike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tinderLike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F19D44221D285EA00C8B2B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F19D44421D285EA00C8B2B5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -88,7 +90,7 @@
 				4F76E22722109FCB00206ACE /* ViewModels */,
 				4F76E223220F910500206ACE /* Model */,
 				4F19D45721D6EA8000C8B2B5 /* Views */,
-				4F76E22622109FA200206ACE /* Controller */,
+				4F76E22622109FA200206ACE /* Controllers */,
 				4F19D45421D29B4800C8B2B5 /* Extensions */,
 				4F19D44221D285EA00C8B2B5 /* AppDelegate.swift */,
 				4F19D44621D285EA00C8B2B5 /* Main.storyboard */,
@@ -128,15 +130,16 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		4F76E22622109FA200206ACE /* Controller */ = {
+		4F76E22622109FA200206ACE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				4F19D44421D285EA00C8B2B5 /* HomeViewController.swift */,
 				4FA26DFB221A2D33007C230A /* RegistrationViewController.swift */,
 				4F9E26982235C962009A9602 /* RegistrationViewModel.swift */,
 				4FA33B34224825A200497068 /* Bindable.swift */,
+				4F136D06226A79B400E4A889 /* SettingsController.swift */,
 			);
-			path = Controller;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		4F76E22722109FCB00206ACE /* ViewModels */ = {
@@ -319,6 +322,7 @@
 				4FA26DFC221A2D33007C230A /* RegistrationViewController.swift in Sources */,
 				4F19D45621D29B7800C8B2B5 /* Extensions+UIView.swift in Sources */,
 				4F76E22922109FF600206ACE /* CardViewModel.swift in Sources */,
+				4F136D07226A79B400E4A889 /* SettingsController.swift in Sources */,
 				4FD5422821DAC57000F7023A /* CardView.swift in Sources */,
 				4F19D45B21D6F75F00C8B2B5 /* TopNavigationStackView.swift in Sources */,
 				4F76E225220F911E00206ACE /* User.swift in Sources */,

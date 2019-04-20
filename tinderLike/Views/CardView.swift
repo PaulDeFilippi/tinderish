@@ -21,10 +21,7 @@ class CardView: UIView {
             if let url = URL(string: imageName) {
                 imageView.sd_setImage(with: url)
             }
-            
-            
-            
-            
+
             informationLabel.attributedText = cardViewModel.attributedString
             informationLabel.textAlignment = cardViewModel.textAlignment
             
@@ -51,7 +48,6 @@ class CardView: UIView {
             })
             self?.barStackView.arrangedSubviews[idx].backgroundColor = .white
         }
-        
     }
     
     // Encapsulation

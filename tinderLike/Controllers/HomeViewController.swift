@@ -16,18 +16,6 @@ class HomeViewController: UIViewController {
     let cardsDeckView = UIView()
     let bottomControls = HomeBottomControlsStackView()
     
-//    let cardViewModels: [CardViewModel] = {
-//        let producers = [
-//            User(name: "Kelly", age: 23, profession: "Disc Jockey", imageNames: ["kelly1", "kelly2", "kelly3"]),
-//            User(name: "Jane", age: 29, profession: "Teacher", imageNames: ["jane1", "jane2", "jane3"]),
-//            Advertiser(title: "Slide Out Menu", brandName: "Code44", posterPhotoName: "slide_out_menu_poster")
-//        ] as [CardViewModelProduceable]
-//
-//        let viewModels = producers.map({return $0.toCardViewModel()})
-//        return viewModels
-//
-//    }()
-    
     var cardViewModels = [CardViewModel]() // empty array
     
     override func viewDidLoad() {
@@ -41,7 +29,7 @@ class HomeViewController: UIViewController {
         fetchUsersFromFirestore()
     }
     
-    // MARK:- Fileprivate
+    // MARK:- Fileprivate Actions
     
     @objc fileprivate func handleRefresh() {
         fetchUsersFromFirestore()
@@ -72,7 +60,6 @@ class HomeViewController: UIViewController {
                 self.setupCardFromUser(user: user)
                 
             })
-            //self.setupFirestoreUserCards()
         }
     }
     
@@ -85,9 +72,9 @@ class HomeViewController: UIViewController {
     }
     
     @objc func handleSettings() {
-        print("Show reg page")
-        let registrationViewController = RegistrationViewController()
-        present(registrationViewController, animated: true)
+        let settingsViewController = SettingsController()
+        let navController = UINavigationController(rootViewController: settingsViewController)
+        present(navController, animated: true)
     }
     
     fileprivate func setupFirestoreUserCards() {
