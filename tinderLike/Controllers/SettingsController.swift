@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Firebase
+import JGProgressHUD
+import SDWebImage
 
 class CustomImagePickerController: UIImagePickerController {
     var imageButton: UIButton?
@@ -32,17 +35,21 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
         imagePicker.imageButton = button
         present(imagePicker, animated: true)
     }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        let selectedImage = info[.originalImage] as? UIImage
-        // set image on button when a photo is selected
-        let imageButton = (picker as? CustomImagePickerController)?.imageButton
-        imageButton?.setImage(selectedImage?.withRenderingMode(.alwaysOriginal), for: .normal)
-        
-        dismiss(animated: true)
-    }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        setupNavigationItems()
+        tableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        tableView.tableFooterView = UIView()
+        tableView.keyboardDismissMode = .interactive
+        
+        fetchCurrentUser()
+    }
+    
+    // MARK:- Fileprivate Actions
+    
+    // helper function
     func createButton(selector: Selector) -> UIButton {
         let button = UIButton(type: .system)
         button.setTitle("Select Photo", for: .normal)
@@ -54,16 +61,61 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
         return button
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        setupNavigationItems()
-        tableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        tableView.tableFooterView = UIView()
-        tableView.keyboardDismissMode = .interactive
+    var user: User?
+    
+    fileprivate func fetchCurrentUser() {
+        // Fetch from Firestore data
+        
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("users").document(uid).getDocument { (snaphot, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            // fetched our user here
+            //print(snaphot?.data())
+            guard let dictionary = snaphot?.data() else { return }
+            self.user = User(dictionary: dictionary)
+            
+            // Reloading data after getting user. We do this so we have a chance to reload data before we set data in cell.
+            self.tableView.reloadData()
+            self.loadUserPhotos()
+        }
     }
     
-    // MARK:- Fileprivate Actions
+    fileprivate func loadUserPhotos() {
+        guard let imageUrl = user?.imageUrl1, let url = URL(string: imageUrl) else { return }
+        SDWebImageManager.shared().loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
+            self.image1Button.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+    
+    }
+    
+    fileprivate func setupNavigationItems() {
+        navigationItem.title = "Settings"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleCancel)),
+            UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleCancel))
+        ]
+    }
+    
+    @objc fileprivate func handleCancel() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        let selectedImage = info[.originalImage] as? UIImage
+        // set image on button when a photo is selected
+        let imageButton = (picker as? CustomImagePickerController)?.imageButton
+        imageButton?.setImage(selectedImage?.withRenderingMode(.alwaysOriginal), for: .normal)
+        
+        dismiss(animated: true)
+    }
+    
+    // MARK:- TableView Delegate Methods
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
@@ -111,29 +163,21 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
         switch indexPath.section {
         case 1:
             cell.textField.placeholder = "Enter Name"
+            cell.textField.text = user?.name
         case 2:
             cell.textField.placeholder = "Enter Profession"
+            cell.textField.text = user?.profession
         case 3:
             cell.textField.placeholder = "Enter Age"
+            if let age = user?.age {
+                cell.textField.text = String(age)
+            }
+            //cell.textField.text = String(user?.age ?? 0)
         default:
             cell.textField.placeholder = "Enter Bio"
         }
         
         return cell
-    }
-    
-    fileprivate func setupNavigationItems() {
-        navigationItem.title = "Settings"
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
-        navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleCancel)),
-            UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleCancel))
-        ]
-    }
-    
-    @objc fileprivate func handleCancel() {
-        dismiss(animated: true, completion: nil)
     }
     
     // MARK:- Views
