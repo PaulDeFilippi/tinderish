@@ -78,8 +78,8 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
             self.user = User(dictionary: dictionary)
             
             // Reloading data after getting user. We do this so we have a chance to reload data before we set data in cell.
-            self.tableView.reloadData()
             self.loadUserPhotos()
+            self.tableView.reloadData()
         }
     }
     
@@ -88,7 +88,6 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
         SDWebImageManager.shared().loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
             self.image1Button.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
-    
     }
     
     fileprivate func setupNavigationItems() {
@@ -96,13 +95,38 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
         navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleCancel)),
+            UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave)),
             UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleCancel))
         ]
     }
     
     @objc fileprivate func handleCancel() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc fileprivate func handleSave() {
+        print("Saving to Firestore")
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let docData: [String: Any] = [
+            "uid": uid,
+            "fullName": user?.name ?? "",
+            "imageUrl1": user?.imageUrl1 ?? "",
+            "age": user?.age ?? -1,
+            "profession": user?.profession ?? ""
+        ]
+        
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Saving Settings"
+        hud.show(in: view)
+        
+        Firestore.firestore().collection("users").document(uid).setData(docData) { (err) in
+            hud.dismiss()
+            if let err = err {
+                print("Failed to save user settings:", err)
+                return
+            }
+            print("Finished saving user info")
+        }
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -164,20 +188,41 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
         case 1:
             cell.textField.placeholder = "Enter Name"
             cell.textField.text = user?.name
+            cell.textField.addTarget(self, action: #selector(handleNameChange), for: .editingChanged)
         case 2:
             cell.textField.placeholder = "Enter Profession"
             cell.textField.text = user?.profession
+            cell.textField.addTarget(self, action: #selector(handleProfessionChange), for: .editingChanged)
         case 3:
             cell.textField.placeholder = "Enter Age"
             if let age = user?.age {
                 cell.textField.text = String(age)
             }
             //cell.textField.text = String(user?.age ?? 0)
+            cell.textField.addTarget(self, action: #selector(handleAgeChange), for: .editingChanged)
         default:
             cell.textField.placeholder = "Enter Bio"
         }
         
         return cell
+    }
+    
+    @objc fileprivate func handleNameChange(textField: UITextField) {
+        //print("Name Changing: \(textField.text ?? "")")
+        self.user?.name = textField.text
+        
+    }
+    
+    @objc fileprivate func handleProfessionChange(textField: UITextField) {
+        //print("\(textField.text ?? "")")
+        self.user?.profession = textField.text
+        
+    }
+    
+    @objc fileprivate func handleAgeChange(textField: UITextField) {
+        //print("\(textField.text ?? "")")
+        self.user?.age = Int(textField.text ?? "")
+        
     }
     
     // MARK:- Views
