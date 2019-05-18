@@ -10,13 +10,155 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tinderLike/ViewModels/CardViewModel.swift"
-            timestampString = "579904032.543615"
+            timestampString = "579908412.6997319"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "32"
             endingLineNumber = "32"
             landmarkName = "imageIndex"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tinderLike/Controllers/HomeViewController.swift"
+            timestampString = "579908412.699809"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "fetchCurrentUser()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tinderLike/Controllers/HomeViewController.swift"
+            timestampString = "579908412.7001179"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tinderLike/Controllers/HomeViewController.swift"
+            timestampString = "579908412.700334"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "HomeViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tinderLike.HomeViewController.(user in _FA60334E989B8BC7F4BB01004DFD354C).getter : Swift.Optional&lt;tinderLike.User&gt;"
+                  moduleName = "tinderLike"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/BlindFaith/New%20Imac%20Development/tinderish/tinderLike/tinderLike/Controllers/HomeViewController.swift"
+                  timestampString = "579908412.97885"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "489">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tinderLike.HomeViewController.(user in _FA60334E989B8BC7F4BB01004DFD354C).setter : Swift.Optional&lt;tinderLike.User&gt;"
+                  moduleName = "tinderLike"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/BlindFaith/New%20Imac%20Development/tinderish/tinderLike/tinderLike/Controllers/HomeViewController.swift"
+                  timestampString = "579908412.980882"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "614">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tinderLike.HomeViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; tinderLike.HomeViewController"
+                  moduleName = "tinderLike"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/BlindFaith/New%20Imac%20Development/tinderish/tinderLike/tinderLike/Controllers/HomeViewController.swift"
+                  timestampString = "579908412.983037"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "343">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tinderLike.HomeViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;tinderLike.HomeViewController&gt;"
+                  moduleName = "tinderLike"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/BlindFaith/New%20Imac%20Development/tinderish/tinderLike/tinderLike/Controllers/HomeViewController.swift"
+                  timestampString = "579908412.985358"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "294">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tinderLike/Controllers/HomeViewController.swift"
+            timestampString = "579908412.700547"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "fetchCurrentUser()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tinderLike/Controllers/HomeViewController.swift"
+            timestampString = "579908412.70075"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "didSaveSettings()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
