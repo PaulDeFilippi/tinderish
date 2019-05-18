@@ -73,7 +73,6 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
                 return
             }
             // fetched our user here
-            //print(snaphot?.data())
             guard let dictionary = snaphot?.data() else { return }
             self.user = User(dictionary: dictionary)
             
@@ -130,8 +129,12 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
             "imageUrl2": user?.imageUrl2 ?? "",
             "imageUrl3": user?.imageUrl3 ?? "",
             "age": user?.age ?? -1,
-            "profession": user?.profession ?? ""
-        ]
+            "profession": user?.profession ?? "",
+            
+            "minSeekingAge": user?.minSeekingAge ?? -1,
+            "maxSeekingAge": user?.maxSeekingAge ?? -1
+            
+            ]
         
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Saving Settings"
@@ -197,10 +200,39 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
         }
     }
     
+    @objc fileprivate func handleMinAgeChange(slider: UISlider) {
+        //print(slider.value)
+        
+        let indexPath = IndexPath(row: 0, section: 5)
+        let ageRangeCell = tableView.cellForRow(at: indexPath) as! AgeRangeCell
+        ageRangeCell.minLabel.text = "Min \(Int(slider.value))"
+        
+        self.user?.minSeekingAge = Int(slider.value)
+    }
+    
+    @objc fileprivate func handleMaxAgeChange(slider: UISlider) {
+        let indexPath = IndexPath(row: 0, section: 5)
+        let ageRangeCell = tableView.cellForRow(at: indexPath) as! AgeRangeCell
+        ageRangeCell.maxLabel.text = "Max \(Int(slider.value))"
+        
+        self.user?.maxSeekingAge = Int(slider.value)
+    }
+    
+    @objc fileprivate func handleNameChange(textField: UITextField) {
+        self.user?.name = textField.text
+    }
+    
+    @objc fileprivate func handleProfessionChange(textField: UITextField) {
+        self.user?.profession = textField.text
+    }
+    
+    @objc fileprivate func handleAgeChange(textField: UITextField) {
+        self.user?.age = Int(textField.text ?? "")
+    }
+    
     // MARK:- TableView Delegate Methods
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
         if section == 0 {
             return header
         }
@@ -212,8 +244,11 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
             headerLabel.text = "Profession"
         case 3:
             headerLabel.text = "Age"
-        default:
+        case 4:
             headerLabel.text = "Bio"
+            
+        default:
+            headerLabel.text = "Seeking Age Range"
         }
         
         headerLabel.font = UIFont.boldSystemFont(ofSize: 16)
@@ -232,7 +267,7 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 6
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -240,6 +275,19 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        // age range cell
+        if indexPath.section == 5 {
+            let ageRangeCell = AgeRangeCell(style: .default, reuseIdentifier: nil)
+            ageRangeCell.minSlider.addTarget(self, action: #selector(handleMinAgeChange), for: .valueChanged)
+            ageRangeCell.maxSlider.addTarget(self, action: #selector(handleMaxAgeChange), for: .valueChanged)
+            
+            // setup labels on cell here
+            ageRangeCell.minLabel.text = "Min \(user?.minSeekingAge ?? -1)"
+            ageRangeCell.maxLabel.text = "Max \(user?.maxSeekingAge ?? -1)"
+            return ageRangeCell
+        }
+        
         let cell = SettingsCell(style: .default, reuseIdentifier: nil)
         
         switch indexPath.section {
@@ -263,24 +311,6 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
         }
         
         return cell
-    }
-    
-    @objc fileprivate func handleNameChange(textField: UITextField) {
-        //print("Name Changing: \(textField.text ?? "")")
-        self.user?.name = textField.text
-        
-    }
-    
-    @objc fileprivate func handleProfessionChange(textField: UITextField) {
-        //print("\(textField.text ?? "")")
-        self.user?.profession = textField.text
-        
-    }
-    
-    @objc fileprivate func handleAgeChange(textField: UITextField) {
-        //print("\(textField.text ?? "")")
-        self.user?.age = Int(textField.text ?? "")
-        
     }
     
     // MARK:- Views

@@ -73,6 +73,9 @@ class CardView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //var imageIndex = 0
+    fileprivate let barDeselectedColor = UIColor(white: 0, alpha: 0.1)
+    
     fileprivate func setupLayout() {
         // custom drawing code
         layer.cornerRadius = 10
@@ -94,8 +97,7 @@ class CardView: UIView {
         informationLabel.numberOfLines = 0
     }
     
-    //var imageIndex = 0
-    fileprivate let barDeselectedColor = UIColor(white: 0, alpha: 0.1)
+
     
     @objc fileprivate func handleTap(gesture: UITapGestureRecognizer) {
         print("tap tap tap !!!")

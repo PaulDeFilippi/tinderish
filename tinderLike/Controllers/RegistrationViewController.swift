@@ -11,6 +11,7 @@ import Firebase
 import JGProgressHUD
 
 extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.originalImage] as? UIImage
         
@@ -131,15 +132,21 @@ class RegistrationViewController: UIViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if self.traitCollection.verticalSizeClass == .compact {
             overallStackView.axis = .horizontal
+            verticalStackView.distribution = .fillEqually
+            selectPhotoButtonHeightAnchor.isActive = false
+            selectPhotoButtonWidthAnchor.isActive = true
         } else {
             overallStackView.axis = .vertical
+            verticalStackView.distribution = .fill
+            selectPhotoButtonWidthAnchor.isActive = false
+            selectPhotoButtonHeightAnchor.isActive = true
         }
     }
     
     fileprivate func setupLayout() {
         view.addSubview(overallStackView)
         overallStackView.axis = .vertical
-        selectPhotoButton.widthAnchor.constraint(equalToConstant: 275).isActive = true
+        //selectPhotoButton.widthAnchor.constraint(equalToConstant: 275).isActive = true
         overallStackView.spacing = 8
         overallStackView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 50, bottom: 0, right: 50))
         overallStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -201,8 +208,9 @@ class RegistrationViewController: UIViewController {
     
     @objc fileprivate func handleSelectPhoto() {
         let imagePickerController = UIImagePickerController()
-        present(imagePickerController, animated: true)
         imagePickerController.delegate = self
+        present(imagePickerController, animated: true)
+        
     }
     
     // MARK:- All Views
@@ -213,7 +221,6 @@ class RegistrationViewController: UIViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 32, weight: .heavy)
         button.backgroundColor = .white
         button.setTitleColor(.black, for: .normal)
-        button.heightAnchor.constraint(equalToConstant: 275).isActive = true
         button.layer.cornerRadius = 16
         button.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
         button.imageView?.contentMode = .scaleAspectFill
@@ -222,8 +229,11 @@ class RegistrationViewController: UIViewController {
         return button
     }()
     
+    lazy var selectPhotoButtonWidthAnchor = selectPhotoButton.widthAnchor.constraint(equalToConstant: 275)
+    lazy var selectPhotoButtonHeightAnchor = selectPhotoButton.heightAnchor.constraint(equalToConstant: 275)
+    
     let fullNameTextField: CustomTextField = {
-        let tf = CustomTextField(padding: 16)
+        let tf = CustomTextField(padding: 24, height: 50)
         tf.placeholder = "Enter full name"
         tf.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         tf.backgroundColor = .white
@@ -232,7 +242,7 @@ class RegistrationViewController: UIViewController {
     }()
     
     let emailTextField: CustomTextField = {
-        let tf = CustomTextField(padding: 16)
+        let tf = CustomTextField(padding: 24, height: 50)
         tf.placeholder = "Enter email"
         tf.keyboardType = .emailAddress
         tf.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
@@ -242,7 +252,7 @@ class RegistrationViewController: UIViewController {
     }()
     
     let passwordTextField: CustomTextField = {
-        let tf = CustomTextField(padding: 16)
+        let tf = CustomTextField(padding: 24, height: 50)
         tf.placeholder = "Enter password"
         tf.isSecureTextEntry = true
         tf.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)

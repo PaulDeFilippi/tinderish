@@ -33,12 +33,12 @@ class SettingsCell: UITableViewCell {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError()
     }
     
     let textField: UITextField = {
         let tf = SettingsTextField()
-        //tf.placeholder = "Enter Name"
+        tf.placeholder = "Enter Name"
         return tf
     }()
     

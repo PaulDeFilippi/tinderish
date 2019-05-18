@@ -21,6 +21,7 @@
 		4F76E225220F911E00206ACE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F76E224220F911E00206ACE /* User.swift */; };
 		4F76E22922109FF600206ACE /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F76E22822109FF600206ACE /* CardViewModel.swift */; };
 		4F76E22B2210DB0700206ACE /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F76E22A2210DB0700206ACE /* Advertiser.swift */; };
+		4F8AAA7522906FE6006D9AB4 /* AgeRangeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AAA7422906FE6006D9AB4 /* AgeRangeCell.swift */; };
 		4F9E26992235C962009A9602 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9E26982235C962009A9602 /* RegistrationViewModel.swift */; };
 		4F9E269B224069AB009A9602 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F9E269A224069AB009A9602 /* GoogleService-Info.plist */; };
 		4FA26DFC221A2D33007C230A /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA26DFB221A2D33007C230A /* RegistrationViewController.swift */; };
@@ -48,6 +49,7 @@
 		4F76E224220F911E00206ACE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4F76E22822109FF600206ACE /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		4F76E22A2210DB0700206ACE /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
+		4F8AAA7422906FE6006D9AB4 /* AgeRangeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeRangeCell.swift; sourceTree = "<group>"; };
 		4F9E26982235C962009A9602 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		4F9E269A224069AB009A9602 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		4FA26DFB221A2D33007C230A /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				4FD5422721DAC57000F7023A /* CardView.swift */,
 				4FA26DFD221A4098007C230A /* CustomTextField.swift */,
 				4F136D08226CB6A200E4A889 /* SettingsCell.swift */,
+				4F8AAA7422906FE6006D9AB4 /* AgeRangeCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				4F19D45921D6EABD00C8B2B5 /* HomeBottomControlsStackView.swift in Sources */,
 				4F76E22B2210DB0700206ACE /* Advertiser.swift in Sources */,
 				4F19D44321D285EA00C8B2B5 /* AppDelegate.swift in Sources */,
+				4F8AAA7522906FE6006D9AB4 /* AgeRangeCell.swift in Sources */,
 				4FA26DFC221A2D33007C230A /* RegistrationViewController.swift in Sources */,
 				4F19D45621D29B7800C8B2B5 /* Extensions+UIView.swift in Sources */,
 				4F76E22922109FF600206ACE /* CardViewModel.swift in Sources */,
