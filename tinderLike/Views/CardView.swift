@@ -9,7 +9,13 @@
 import UIKit
 import SDWebImage
 
+protocol CardViewDelegate {
+    func didTapMoreInfo()
+}
+
 class CardView: UIView {
+    
+    var delegate: CardViewDelegate?
     
     var cardViewModel: CardViewModel! {
         didSet {
@@ -36,20 +42,6 @@ class CardView: UIView {
         }
     }
     
-    fileprivate func setupImageIndexObserver() {
-        cardViewModel.immageIndexObserver = { [weak self] (idx, imageUrl) in
-            print("Changing Image from view model")
-            if let url = URL(string: imageUrl ?? "") {
-                self?.imageView.sd_setImage(with: url)
-            }
-            
-            self?.barStackView.arrangedSubviews.forEach({ (v) in
-                v.backgroundColor = self?.barDeselectedColor
-            })
-            self?.barStackView.arrangedSubviews[idx].backgroundColor = .white
-        }
-    }
-    
     // Encapsulation
     fileprivate let imageView = UIImageView(image: #imageLiteral(resourceName: "lady5c"))
     fileprivate let gradientLayer = CAGradientLayer()
@@ -58,6 +50,9 @@ class CardView: UIView {
     // Configurations
     fileprivate let threshold: CGFloat = 80
     
+    // -------------------------------------------------------------------------
+    // MARK: - Initialization
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -75,6 +70,9 @@ class CardView: UIView {
     
     //var imageIndex = 0
     fileprivate let barDeselectedColor = UIColor(white: 0, alpha: 0.1)
+    
+    // -------------------------------------------------------------------------
+    // MARK: - Actions
     
     fileprivate func setupLayout() {
         // custom drawing code
@@ -95,9 +93,24 @@ class CardView: UIView {
         informationLabel.textColor = .white
         informationLabel.font = UIFont.systemFont(ofSize: 34, weight: .heavy)
         informationLabel.numberOfLines = 0
+        
+        addSubview(moreInfoButton)
+        moreInfoButton.anchor(top: nil, leading: nil, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 16, right: 16), size: .init(width: 44, height: 44))
     }
     
-
+    fileprivate func setupImageIndexObserver() {
+        cardViewModel.immageIndexObserver = { [weak self] (idx, imageUrl) in
+            print("Changing Image from view model")
+            if let url = URL(string: imageUrl ?? "") {
+                self?.imageView.sd_setImage(with: url)
+            }
+            
+            self?.barStackView.arrangedSubviews.forEach({ (v) in
+                v.backgroundColor = self?.barDeselectedColor
+            })
+            self?.barStackView.arrangedSubviews[idx].backgroundColor = .white
+        }
+    }
     
     @objc fileprivate func handleTap(gesture: UITapGestureRecognizer) {
         print("tap tap tap !!!")
@@ -180,5 +193,29 @@ class CardView: UIView {
             }
         })
     }
+    
+    @objc fileprivate func handleMoreInfo() {
+        
+        //print("Info button tapped")
+        // present is missing when we subclass UIView
+        // hack solution - hack solution is now commented out
+//        let rootViewController = UIApplication.shared.keyWindow?.rootViewController
+//        let userDetailsController = UIViewController()
+//        userDetailsController.view.backgroundColor = .yellow
+//        rootViewController?.present(userDetailsController, animated: true)
+        
+        // use delegate instead - much more elegant solution
+        delegate?.didTapMoreInfo()
+    }
+    
+    // -------------------------------------------------------------------------
+    // MARK: - Views
+    
+    fileprivate let moreInfoButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "info_icon").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.addTarget(self, action: #selector(handleMoreInfo), for: .touchUpInside)
+        return button
+    }()
     
 }
