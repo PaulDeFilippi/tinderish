@@ -22,6 +22,8 @@
 		4F76E22922109FF600206ACE /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F76E22822109FF600206ACE /* CardViewModel.swift */; };
 		4F76E22B2210DB0700206ACE /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F76E22A2210DB0700206ACE /* Advertiser.swift */; };
 		4F8AAA7522906FE6006D9AB4 /* AgeRangeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AAA7422906FE6006D9AB4 /* AgeRangeCell.swift */; };
+		4F8AAA792290C145006D9AB4 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AAA772290C145006D9AB4 /* LoginViewModel.swift */; };
+		4F8AAA7A2290C145006D9AB4 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AAA782290C145006D9AB4 /* LoginController.swift */; };
 		4F9E26992235C962009A9602 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9E26982235C962009A9602 /* RegistrationViewModel.swift */; };
 		4F9E269B224069AB009A9602 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F9E269A224069AB009A9602 /* GoogleService-Info.plist */; };
 		4FA26DFC221A2D33007C230A /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA26DFB221A2D33007C230A /* RegistrationViewController.swift */; };
@@ -50,6 +52,8 @@
 		4F76E22822109FF600206ACE /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		4F76E22A2210DB0700206ACE /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 		4F8AAA7422906FE6006D9AB4 /* AgeRangeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeRangeCell.swift; sourceTree = "<group>"; };
+		4F8AAA772290C145006D9AB4 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		4F8AAA782290C145006D9AB4 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		4F9E26982235C962009A9602 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		4F9E269A224069AB009A9602 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		4FA26DFB221A2D33007C230A /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -139,6 +143,7 @@
 		4F76E22622109FA200206ACE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4F8AAA762290C12C006D9AB4 /* Login */,
 				4F19D44421D285EA00C8B2B5 /* HomeViewController.swift */,
 				4FA26DFB221A2D33007C230A /* RegistrationViewController.swift */,
 				4F9E26982235C962009A9602 /* RegistrationViewModel.swift */,
@@ -154,6 +159,15 @@
 				4F76E22822109FF600206ACE /* CardViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		4F8AAA762290C12C006D9AB4 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				4F8AAA782290C145006D9AB4 /* LoginController.swift */,
+				4F8AAA772290C145006D9AB4 /* LoginViewModel.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		7B76488098BF15FCDF3BDE37 /* Frameworks */ = {
@@ -328,8 +342,10 @@
 				4F8AAA7522906FE6006D9AB4 /* AgeRangeCell.swift in Sources */,
 				4FA26DFC221A2D33007C230A /* RegistrationViewController.swift in Sources */,
 				4F19D45621D29B7800C8B2B5 /* Extensions+UIView.swift in Sources */,
+				4F8AAA792290C145006D9AB4 /* LoginViewModel.swift in Sources */,
 				4F76E22922109FF600206ACE /* CardViewModel.swift in Sources */,
 				4F136D07226A79B400E4A889 /* SettingsController.swift in Sources */,
+				4F8AAA7A2290C145006D9AB4 /* LoginController.swift in Sources */,
 				4FD5422821DAC57000F7023A /* CardView.swift in Sources */,
 				4F19D45B21D6F75F00C8B2B5 /* TopNavigationStackView.swift in Sources */,
 				4F76E225220F911E00206ACE /* User.swift in Sources */,
