@@ -26,8 +26,6 @@ class HomeViewController: UIViewController, SettingsControllerDelegate, LoginCon
         
         setupLayout()
         fetchCurrentUser()
-//        setupFirestoreUserCards()
-//        fetchUsersFromFirestore()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -60,7 +58,6 @@ class HomeViewController: UIViewController, SettingsControllerDelegate, LoginCon
             // fetched our user here
             guard let dictionary = snaphot?.data() else { return }
             self.user = User(dictionary: dictionary)
-            //print("Current User:", self.user)
             self.fetchUsersFromFirestore()
 
         }
@@ -96,9 +93,6 @@ class HomeViewController: UIViewController, SettingsControllerDelegate, LoginCon
                 if user.uid != Auth.auth().currentUser?.uid {
                     self.setupCardFromUser(user: user)
                 }
-                
-//                self.cardViewModels.append(user.toCardViewModel())
-//                self.lastFetchedUser = user
             })
         }
     }
