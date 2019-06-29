@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 
 protocol CardViewDelegate {
-    func didTapMoreInfo()
+    func didTapMoreInfo(cardViewModel: CardViewModel)
 }
 
 class CardView: UIView {
@@ -21,7 +21,7 @@ class CardView: UIView {
         didSet {
             // let imageName = cardViewModel.imageNames[0] - this works but app will crash if there is no [0] index
             // needed to unwrap the imageNames variable after we changed it to an Array of images
-            let imageName = cardViewModel.imageNames.first ?? ""
+            let imageName = cardViewModel.imageUrls.first ?? ""
             // imageView.image = UIImage(named: imageName)
             // load image using some kind of url instead
             if let url = URL(string: imageName) {
@@ -31,7 +31,7 @@ class CardView: UIView {
             informationLabel.attributedText = cardViewModel.attributedString
             informationLabel.textAlignment = cardViewModel.textAlignment
             
-            (0..<cardViewModel.imageNames.count).forEach { (_) in
+            (0..<cardViewModel.imageUrls.count).forEach { (_) in
                 let barView = UIView()
                 barView.backgroundColor = barDeselectedColor
                 barStackView.addArrangedSubview(barView)
@@ -205,7 +205,7 @@ class CardView: UIView {
 //        rootViewController?.present(userDetailsController, animated: true)
         
         // use delegate instead - much more elegant solution
-        delegate?.didTapMoreInfo()
+        delegate?.didTapMoreInfo(cardViewModel: self.cardViewModel)
     }
     
     // -------------------------------------------------------------------------
