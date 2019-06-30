@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4BAE8900BE8392A21D76EB63 /* Pods_tinderLike.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B50B1F6DE410173FFD72A1A /* Pods_tinderLike.framework */; };
+		4F02FBF422C8243200D8E2DD /* SwipingPhotosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02FBF322C8243200D8E2DD /* SwipingPhotosController.swift */; };
 		4F136D07226A79B400E4A889 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F136D06226A79B400E4A889 /* SettingsController.swift */; };
 		4F136D09226CB6A200E4A889 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F136D08226CB6A200E4A889 /* SettingsCell.swift */; };
 		4F19D44321D285EA00C8B2B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F19D44221D285EA00C8B2B5 /* AppDelegate.swift */; };
@@ -37,6 +38,7 @@
 		100828AD6E7C764B51EEC4E7 /* Pods-tinderLike.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tinderLike.release.xcconfig"; path = "Target Support Files/Pods-tinderLike/Pods-tinderLike.release.xcconfig"; sourceTree = "<group>"; };
 		11B438B83BCB03C2C081AC3C /* Pods-tinderLike.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tinderLike.debug.xcconfig"; path = "Target Support Files/Pods-tinderLike/Pods-tinderLike.debug.xcconfig"; sourceTree = "<group>"; };
 		3B50B1F6DE410173FFD72A1A /* Pods_tinderLike.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tinderLike.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F02FBF322C8243200D8E2DD /* SwipingPhotosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingPhotosController.swift; sourceTree = "<group>"; };
 		4F136D06226A79B400E4A889 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		4F136D08226CB6A200E4A889 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		4F19D43F21D285EA00C8B2B5 /* tinderLike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tinderLike.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				4F8AAA7C2291CC6C006D9AB4 /* UserDetailsViewController.swift */,
+				4F02FBF322C8243200D8E2DD /* SwipingPhotosController.swift */,
 			);
 			path = "User Details";
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				4FD5422821DAC57000F7023A /* CardView.swift in Sources */,
 				4F19D45B21D6F75F00C8B2B5 /* TopNavigationStackView.swift in Sources */,
 				4F76E225220F911E00206ACE /* User.swift in Sources */,
+				4F02FBF422C8243200D8E2DD /* SwipingPhotosController.swift in Sources */,
 				4F136D09226CB6A200E4A889 /* SettingsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
